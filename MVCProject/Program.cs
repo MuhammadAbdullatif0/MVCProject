@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using Bulky.DataAccess.Data;
+using Bulky.DataAccess.Repository.IGenericRepository;
+using Bulky.DataAccess.Repository;
+
 namespace MVCProject
 {
     public class Program
@@ -8,6 +13,11 @@ namespace MVCProject
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<AppDBContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 
@@ -28,7 +38,7 @@ namespace MVCProject
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }
