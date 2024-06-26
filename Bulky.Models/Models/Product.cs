@@ -32,5 +32,5 @@ public class Product
     [ValidateNever]
     public Category? Category { get; set; }
     [ValidateNever]
-    public string? ImgUrl { get; set; }
+    public string? ProductImages { get; set; }
 }

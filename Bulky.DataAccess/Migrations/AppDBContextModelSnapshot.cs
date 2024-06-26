@@ -85,9 +85,6 @@ namespace Bulky.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImgUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("ListPrice")
                         .HasColumnType("float");
 
@@ -99,6 +96,9 @@ namespace Bulky.DataAccess.Migrations
 
                     b.Property<double>("Price50")
                         .HasColumnType("float");
+
+                    b.Property<string>("ProductImages")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -118,11 +118,11 @@ namespace Bulky.DataAccess.Migrations
                             CategoryId = 1,
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "SWD9999001",
-                            ImgUrl = "",
                             ListPrice = 99.0,
                             Price = 90.0,
                             Price100 = 80.0,
                             Price50 = 85.0,
+                            ProductImages = "",
                             Title = "Fortune of Time"
                         },
                         new
@@ -132,11 +132,11 @@ namespace Bulky.DataAccess.Migrations
                             CategoryId = 2,
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "CAW777777701",
-                            ImgUrl = "",
                             ListPrice = 40.0,
                             Price = 30.0,
                             Price100 = 20.0,
                             Price50 = 25.0,
+                            ProductImages = "",
                             Title = "Dark Skies"
                         },
                         new
@@ -146,11 +146,11 @@ namespace Bulky.DataAccess.Migrations
                             CategoryId = 2,
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "RITO5555501",
-                            ImgUrl = "",
                             ListPrice = 55.0,
                             Price = 50.0,
                             Price100 = 35.0,
                             Price50 = 40.0,
+                            ProductImages = "",
                             Title = "Vanish in the Sunset"
                         },
                         new
@@ -160,11 +160,11 @@ namespace Bulky.DataAccess.Migrations
                             CategoryId = 3,
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "WS3333333301",
-                            ImgUrl = "",
                             ListPrice = 70.0,
                             Price = 65.0,
                             Price100 = 55.0,
                             Price50 = 60.0,
+                            ProductImages = "",
                             Title = "Cotton Candy"
                         },
                         new
@@ -174,11 +174,11 @@ namespace Bulky.DataAccess.Migrations
                             CategoryId = 1,
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "SOTJ1111111101",
-                            ImgUrl = "",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price100 = 20.0,
                             Price50 = 25.0,
+                            ProductImages = "",
                             Title = "Rock in the Ocean"
                         },
                         new
@@ -188,11 +188,11 @@ namespace Bulky.DataAccess.Migrations
                             CategoryId = 3,
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "FOT000000001",
-                            ImgUrl = "",
                             ListPrice = 25.0,
                             Price = 23.0,
                             Price100 = 20.0,
                             Price50 = 22.0,
+                            ProductImages = "",
                             Title = "Leaves and Wonders"
                         });
                 });

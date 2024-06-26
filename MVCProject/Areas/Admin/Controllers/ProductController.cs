@@ -9,16 +9,18 @@ namespace MVCProject.Areas.Admin.Controllers;
 public class ProductController : Controller
 {
     private readonly IUnitOfWork _dbContext;
-    public ProductController(IUnitOfWork db)
+    private readonly IWebHostEnvironment _webHost;
+    public ProductController(IUnitOfWork db , IWebHostEnvironment webHost)
     {
         _dbContext = db;
+        _webHost = webHost;
     }
     public IActionResult Index()
     {
         List<Product> products = _dbContext.productRepository.GetAll().ToList();
         return View("Product", products);
     }
-    public IActionResult Create()
+    public IActionResult Upsert(int? id)
     {
         IEnumerable<SelectListItem> list = _dbContext.CategoryRepository.GetAll()
             .Select(u => new SelectListItem
@@ -31,41 +33,40 @@ public class ProductController : Controller
             CategoryList = list,
             Product = new Product()
         };
-        return View(productVM);
+        if(id is null || id == 0)
+        {
+            return View(productVM);
+        }
+        else
+        {
+            productVM.Product = _dbContext.productRepository.Get(e => e.Id == id);
+            if (productVM.Product == null)
+            {
+                return BadRequest();
+            }
+            return View(productVM);
+        }      
     }
     [HttpPost]
-    public IActionResult Create(ProductVM obj)
+    public IActionResult Upsert(ProductVM obj  , IFormFile? file)
     {
         if (ModelState.IsValid)
         {
+            var wwwRootPath = _webHost.WebRootPath;
+            if (file != null) {
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                string productPath = Path.Combine(wwwRootPath, @"images\product");
+
+                using(var fileStream = new FileStream(Path.Combine(productPath , fileName) , FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+                obj.Product.ProductImages = @"\images\product\" + fileName;
+            }
+
             _dbContext.productRepository.Add(obj.Product);
             _dbContext.Save();
             TempData["Message"] = "Added Successfully!";
-            return RedirectToAction("Index");
-        }
-        return View();
-    }
-    public IActionResult Edit(int? id)
-    {
-        if (id is null || id == 0)
-        {
-            return NotFound();
-        }
-        Product? Product = _dbContext.productRepository.Get(e => e.Id == id);
-        if (Product == null)
-        {
-            return BadRequest();
-        }
-        return View(Product);
-    }
-    [HttpPost]
-    public IActionResult Edit(Product obj)
-    {
-        if (ModelState.IsValid)
-        {
-            _dbContext.productRepository.Update(obj);
-            _dbContext.Save();
-            TempData["Message"] = "Updated Successfully!";
             return RedirectToAction("Index");
         }
         return View();
