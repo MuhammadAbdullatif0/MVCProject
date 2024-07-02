@@ -7,6 +7,11 @@ a.navbar-brand {
     word-break: break-all;
 }
 
+.img-fixed-height {
+    height: 300px; /* Set your desired height */
+    object-fit: cover; /* Maintain aspect ratio, fill the height */
+    width: 100%; /* Ensure the width is 100% */
+}
 
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {

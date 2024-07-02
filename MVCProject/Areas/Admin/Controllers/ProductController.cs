@@ -1,12 +1,8 @@
-﻿using Bulky.DataAccess.Repository;
-using Bulky.DataAccess.Repository.IGenericRepository;
+﻿using Bulky.DataAccess.Repository.IGenericRepository;
 using Bulky.Models;
 using Bulky.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Text.Json.Serialization;
-using System.Text.Json;
-using Microsoft.AspNetCore.Hosting;
 
 namespace MVCProject.Areas.Admin.Controllers;
 [Area("Admin")]
