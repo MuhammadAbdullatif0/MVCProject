@@ -27,15 +27,31 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         _db.Set<T>().RemoveRange(entities);
     }
 
-    public T Get(Expression<Func<T, bool>> filter)
+    public T Get(Expression<Func<T, bool>> filter , string? NavigationProperty = null)
     {
         IQueryable<T> query = _db.Set<T>().Where(filter);
+        if (!string.IsNullOrEmpty(NavigationProperty))
+        {
+            foreach (var n in NavigationProperty.
+                Split(',', StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(n);
+            }
+        }
         return query.FirstOrDefault();
     }
 
-    public IEnumerable<T> GetAll()
+    public IEnumerable<T> GetAll(string? NavigationProperty = null)
     {
         IQueryable<T> query = _db.Set<T>();
+        if (!string.IsNullOrEmpty(NavigationProperty))
+        {
+            foreach (var n in NavigationProperty.
+                Split(',', StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(n);
+            }
+        }
         return query.ToList();
     }
 }

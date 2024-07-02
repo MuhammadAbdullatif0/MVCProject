@@ -1,8 +1,4 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-var dataTable;
+﻿var dataTable;
 
 $(document).ready(function () {
     loadDataTable();
@@ -13,15 +9,16 @@ function loadDataTable() {
         "ajax": {
             url: '/admin/product/getall',
             dataSrc: function (json) {
-                return json
+                console.log(json);
+                return json.data;
             }
         },
         "columns": [
-            { data: 'title', "width": "25%" },
-            { data: 'isbn', "width": "15%" },
-            { data: 'listPrice', "width": "10%" },
-            { data: 'author', "width": "15%" },
-            { data: 'category.name', "width": "10%" },
+            { data: 'Title', "width": "25%" },
+            { data: 'ISBN', "width": "15%" },
+            { data: 'ListPrice', "width": "10%" },
+            { data: 'Author', "width": "15%" },
+            { data: 'Category.Name', "width": "10%" },
             {
                 data: 'id',
                 "render": function (data) {
